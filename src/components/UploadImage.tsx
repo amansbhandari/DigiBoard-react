@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { Alert } from "@mui/material";
+import passportImage from "../assets/passport.png";
+
 function UploadImage() {
   const navigate = useNavigate();
   const [files, setFiles] = useState(""); //store file
@@ -21,13 +23,12 @@ function UploadImage() {
         event.preventDefault();
 
         let currentFile = files[0];
-        console.log("yoo" + currentFile);
 
         let formData = new FormData();
         formData.append("file", currentFile);
 
         axios
-          .post("http://127.0.0.1:8080/image/details", formData, {
+          .post("http://52.207.227.237:8082/image/details", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
@@ -46,10 +47,16 @@ function UploadImage() {
     >
       <Grid spacing={0} className="Grid">
         <Box className="Box">
-          <h2 className="InputLabel">DigiBoard</h2>
+          <h1 className="InputLabel">DigiBoard</h1>
         </Box>
-        <h4 className="InputLabel">Upload Passport Photo</h4>
+        <h4 className="heading">Upload Passport Photo</h4>
+        <text className="Instruction">
+          Upload a good quality photo of your passport's bio page. Please avoid
+          uploading image with glare, blurness and low light
+        </text>
+        <img className="image" src={passportImage}></img>
         <input
+          className="ChooseFile"
           type="file"
           name="image"
           placeholder="Image"
